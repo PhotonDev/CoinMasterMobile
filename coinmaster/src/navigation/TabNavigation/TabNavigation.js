@@ -22,7 +22,7 @@ const TabNavigation = TabNavigator ({
   Register : {
     screen : Register,
     navigationOptions : {
-      tabBarLabel : 'RegisterKit',
+      tabBarLabel : 'Register',
       tabBarIcon  : (
         { 
           tintColor 
