@@ -4,7 +4,7 @@ import DismissKeyboard from 'dismissKeyboard';
 
 import LoginForm from './LoginForm';
 
-export default class LoginComponent extends Component {
+export default class Login extends Component {
 
   render () {
     return (
@@ -51,4 +51,4 @@ const styles = StyleSheet.create ({
     }
 });
 
-AppRegistry.registerComponent ('LoginComponent', () => LoginComponent);
+AppRegistry.registerComponent ('Login', () => Login);
