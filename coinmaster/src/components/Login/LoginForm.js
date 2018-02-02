@@ -83,7 +83,7 @@ const styles = StyleSheet.create ({
         textAlign : 'center',
         color : '#FFFFFF',
         fontWeight : '700'
-    }
+    },
 })
 
 AppRegistry.registerComponent ('LoginForm', () => LoginForm);

@@ -4,6 +4,7 @@ import { AppRegistry, View, StyleSheet } from 'react-native';
 import * as firebase from "firebase";
 
 import TabNavigation from './src/navigation/TabNavigation/TabNavigation';
+import StackNavigation from './src/navigation/StackNavigation/StackNavigation';
 
 import Login from './src/components/Login/Login';
 
@@ -23,7 +24,7 @@ export default class App extends React.Component {
       <View style = { styles.container }>
         {this.state.loggedIn && 
           <TabNavigation /> || 
-          <Login /> }
+          <StackNavigation /> }
 
       </View>
     );

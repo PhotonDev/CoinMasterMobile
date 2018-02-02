@@ -1,3 +1,6 @@
+import React from 'react';
+import { Alert } from 'react-native';
+
 import * as firebase from "firebase";
 
 const config = {
@@ -44,6 +47,7 @@ export default class Database {
             console.log("Account created");
             Database.currentUser = firebase.auth().currentUser;
             Database.sendVerificationEmail ();
+            Database.notifySignupVerficiation ();
             // use below if wish to store additional information about user
             /* var data = {
                 email: $scope.email,
@@ -68,15 +72,60 @@ export default class Database {
         });
     }
 
+    static checkUserVerfied () {
+        return Database.currentUser.emailVerified;
+    }
+
     static async sendVerificationEmail () {
         if (!Database.currentUser.emailVerified) {
-            console.log ("IS USER VERIFED");
             console.log (Database.currentUser.emailVerified);
             Database.currentUser.sendEmailVerification().then (function () {
                 console.log ("email sent");
             }).catch (function (error) {
                 console.log (error);
             });
+        }
+    }
+    
+    static async notifySignupVerficiation () {
+        if (!Database.checkUserVerfied ()) {
+            Alert.alert (
+                'Verification Email Sent',
+                'Please check email',
+                [
+                    {
+                        text : 'Resend email', onPress : () => {
+                            Database.sendVerificationEmail ();
+                        }
+                    },
+                    {
+                        text : 'Okay', onPress : () => {
+                            console.log ('Okay pressed');
+                        }
+                    }
+                ]
+            )
+        }
+    }
+
+    static async notifyUserVerification () {
+        if (!Database.checkUserVerfied ()) {
+            Alert.alert (
+                'User not verified',
+                'Please verify email',
+                [
+                    {
+                        text : 'Resend email', onPress : () => {
+                            Database.sendVerificationEmail ();
+                        }
+                    },
+                    {
+                        text : 'Okay', onPress : () => {
+                            console.log ('Okay pressed');
+                        }
+                    }
+                ]
+            )
         }
     }
 
@@ -88,10 +137,11 @@ export default class Database {
                 console.log(user.emailVerified);
 
                 Database.currentUser = user;
+                Database.notifyUserVerification ();
 
-                if (!user.emailVerified) {
+                /* if (!user.emailVerified) {
                     Database.sendVerificationEmail ();
-                }
+                } */
                 // Navigate to home page, after login
                 successCallback ();
             }).catch(function (error) {
