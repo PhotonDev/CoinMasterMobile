@@ -8,7 +8,7 @@ import Register from '../../components/Register/Register'
 
 const TabNavigation = TabNavigator ({
   Profile : {
-    screen : Login,
+    screen : Profile,
     navigationOptions : {
       tabBarLabel : 'Profile',
       tabBarIcon  : ({ tintColor }) => (
@@ -19,22 +19,6 @@ const TabNavigation = TabNavigator ({
       )
     },
   },
-  Register : {
-    screen : Register,
-    navigationOptions : {
-      tabBarLabel : 'Register',
-      tabBarIcon  : (
-        { 
-          tintColor 
-        }
-        ) => (
-        <Image 
-          source = { require ('../../../assets/address-book.imageset/address_book.png') }
-          style  = { [styles.icon, { tintColor : tintColor }]}
-        />
-      )
-    },
-  }
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: true,

@@ -15,6 +15,7 @@ export default class Database {
 
     // static staticKitsRef = firebase.database ().ref('statickits');
     // static overdosesRef  = firebase.database ().ref('overdoses');
+    static usersRef = firebase.database ().ref ().child("user");
 
     static currentUser = undefined;
 
@@ -43,6 +44,20 @@ export default class Database {
             console.log("Account created");
             Database.currentUser = firebase.auth().currentUser;
             Database.sendVerificationEmail ();
+            // use below if wish to store additional information about user
+            /* var data = {
+                email: $scope.email,
+                password: $scope.password,
+                firstName: $scope.firstName,
+                lastName: $scope.lastName,
+                id:user.uid
+            }
+            ref.child(user.uid).set(data).then(function(ref) {//use 'child' and 'set' combination to save data in your own generated key
+                console.log("Saved");
+                $location.path('/profile');
+            }, function(error) {
+                console.log(error); 
+            }); */
             successCallback(user);
         }).catch(function(error) {
             console.log(error.toString());
@@ -88,13 +103,14 @@ export default class Database {
             });
     }
 
-    async logout() {
+    static async logout(successCallback, failureCallback) {
         try {
             await firebase.auth().signOut();
-
+            successCallback ();
             // Navigate to login component
         } catch (error) {
             console.log(error.toString());
+            failureCallback ();
         }
     }
 
