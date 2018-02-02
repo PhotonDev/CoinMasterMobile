@@ -1,14 +1,40 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, View, StyleSheet } from 'react-native';
+
+import * as firebase from "firebase";
 
 import TabNavigation from './src/navigation/TabNavigation/TabNavigation';
+import StackNavigation from './src/navigation/StackNavigation/StackNavigation';
+
+import Login from './src/components/Login/Login';
 
 export default class App extends React.Component {
+  state = {
+    loggedIn : false
+  };
+
+  componentWillMount () {
+    firebase.auth().onAuthStateChanged( user =>
+      this.setState({loggedIn: !!user})
+    );
+  }
+
   render() {
     return (
-      <TabNavigation />
+      <View style = { styles.container }>
+        {this.state.loggedIn && 
+          <TabNavigation /> || 
+          <StackNavigation /> }
+
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create ({
+  container : {
+    flex : 1
+  }
+});
 
 AppRegistry.registerComponent ('App', () => App);

@@ -3,24 +3,27 @@ import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleS
 
 import Database from '../../database/Database';
 
-export default class LoginForm extends Component {
+export default class RegisterForm extends Component {
 
     constructor () {
         super();
         this.state = {
-            username : '',
-            password : ''
+            username        : '',
+            password        : '',
+            confirmPassword : '',
         };
     }
-   
-    loginUser = () => {
-        const { username, password } = this.state;
+
+    registerUser = () => {
+        const { username, password, confirmPassword } = this.state;
         console.log (username);
         console.log (password);
-        Database.login (username, password, () => {
-            console.log ("success function");
+        console.log (confirmPassword);
+        Database.signup (username, password, (user) => {
+            console.log ('success function');
+            console.log (user);
         }, () => {
-            console.log ("failure function");
+            console.log ('failure function');
         });
     }
 
@@ -50,13 +53,24 @@ export default class LoginForm extends Component {
                         returnKeyType = 'go'
                         value = { this.state.password }
                         onChangeText = { password => this.setState ( { password } ) }
-                        onSubmitEditing = { this.loginUser }
+                        onSubmitEditing = { () => this.confirmPasswordInput.focus () }
                         style = { styles.input } 
                         ref = { (input) => this.passwordInput = input }
                         secureTextEntry />
 
-                    <TouchableOpacity onPress = { this.loginUser } style = { styles.buttonContainer }>
-                        <Text style = { styles.buttonText }>Login</Text>
+                    <TextInput
+                        placeholder = 'confirm password'
+                        placeholderTextColor = 'rgba(255, 255, 255, 0.7)'
+                        returnKeyType = 'go'
+                        value = { this.state.confirmPassword }
+                        onChangeText = { confirmPassword => this.setState ( { confirmPassword } ) }
+                        onSubmitEditing = { this.registerUser }
+                        style = { styles.input } 
+                        ref = { (input) => this.confirmPasswordInput = input }
+                        secureTextEntry />
+
+                    <TouchableOpacity onPress = { this.registerUser } style = { styles.buttonContainer }>
+                        <Text style = { styles.buttonText }>Register</Text>
                     </TouchableOpacity>
 
             </View>
@@ -83,7 +97,7 @@ const styles = StyleSheet.create ({
         textAlign : 'center',
         color : '#FFFFFF',
         fontWeight : '700'
-    },
+    }
 })
 
-AppRegistry.registerComponent ('LoginForm', () => LoginForm);
+AppRegistry.registerComponent ('RegisterForm', () => RegisterForm);
