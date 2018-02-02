@@ -6,8 +6,9 @@ import JSONHelper from './JSONHelper';
 export default class Coins {
 
     static CURRENCY = "USD";
-    static SINGLE_COIN_URL = "https://api.coinmarketcap.com/v1/ticker/$COIN/?convert=$CURRENCY";
 
+    static SINGLE_COIN_URL = "https://api.coinmarketcap.com/v1/ticker/$COIN/?convert=$CURRENCY";
+    static MULTIPLE_COINS_URL = "https://api.coinmarketcap.com/v1/ticker/?convert=$CURRENCY&limit=$LIMIT";
 
     /*
         [
@@ -38,10 +39,16 @@ export default class Coins {
         await JSONHelper.getJSON (Coins.generateSingleCoinURL (coin), successCallback, failureCallback);
     }
 
+    static async getCoins (limit, successCallback, failureCallback) {
+        await JSONHelper.getJSON (Coins.generateMultipleCoinsURL (limit), successCallback, failureCallback);
+    }
+
     static generateSingleCoinURL (coin) {
-        console.log (Coins.SINGLE_COIN_URL);
-        console.log ((Coins.SINGLE_COIN_URL.replace ("$COIN", coin)).replace ("$CURRENCY", Coins.CURRENCY));
         return (Coins.SINGLE_COIN_URL.replace ("$COIN", coin)).replace ("$CURRENCY", Coins.CURRENCY);
+    }
+
+    static generateMultipleCoinsURL (limit) {
+        return (Coins.MULTIPLE_COINS_URL.replace ("$LIMIT", limit)).replace ("$CURRENCY", Coins.CURRENCY);
     }
 
 }

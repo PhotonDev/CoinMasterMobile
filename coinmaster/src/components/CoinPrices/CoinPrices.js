@@ -1,40 +1,62 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
+import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleSheet, ScrollView } from 'react-native';
 
 import Coins from '../../api/Coins';
 
 export default class CoinPrices extends Component {
 
     state = {
-        coins : {},
+        coins : [],
     }
 
     componentDidMount () {
-        Coins.getCoin ("bitcoin", (data) => {
+        Coins.getCoins (15, (data) => {
+            console.log ("SUCCESS");
             this.setState (
                 {
-                    coins : data[0]
+                    // coins : data[0]
+                    coins : data
                 }
             );
             // console.log (data[0]);
         }, () => {
             console.log ("failed to get data");
         });
+
+        /* Coins.getCoin ("bitcoin", (data) => {
+            this.setState (
+                {
+                    // coins : data[0]
+                    coins : data
+                }
+            );
+            // console.log (data[0]);
+        }, () => {
+            console.log ("failed to get data");
+        }); */
     }
 
     render () {
         return (
-            <View style = { styles.container }>
+            <ScrollView style = { styles.container }>
 
                 <StatusBar 
                     barStyle = 'light-content'
                 />
+                
+                { this.state.coins.map ((obj, index) => (
+                    <Text key = { index }>
+                        { JSON.stringify(obj, null, 4) }
+                    </Text>
+                ))}
 
+            {/*
                 <Text>
                     { JSON.stringify(this.state.coins, null, 4) }
                 </Text>
+            */ }
 
-            </View>
+            </ScrollView>
         );
     }
 }
