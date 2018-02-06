@@ -6,6 +6,7 @@ import Login from '../../components/Login/Login';
 import Register from '../../components/Register/Register';
 import Profile from '../../components/Profile/Profile';
 import CoinPrices from '../../components/CoinPrices/CoinPrices';
+import RecycleTestComponent from '../../components/CoinPrices/RecycleTestComponent';
 
 const TabNavigation = TabNavigator ({
   Profile : {
@@ -24,6 +25,20 @@ const TabNavigation = TabNavigator ({
     screen : CoinPrices,
     navigationOptions : {
       tabBarLabel : 'Coin Prices',
+      tabBarIcon : ({
+        tintColor
+      }) => (
+        <Image 
+          source = { require ('../../../assets/profile.imageset/user_male.png') }
+          style  = { [styles.icon, { tintColor : tintColor }]}
+        />
+      )
+    }
+  },
+  RecycleTestComponent : {
+    screen : RecycleTestComponent,
+    navigationOptions : {
+      tabBarLabel : 'RecycleTestComponent',
       tabBarIcon : ({
         tintColor
       }) => (
