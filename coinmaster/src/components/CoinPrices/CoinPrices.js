@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleSheet, ScrollView } from 'react-native';
 
+import { SearchBar } from 'react-native-elements';
+
 import Coins from '../../api/Coins';
 
 export default class CoinPrices extends Component {
@@ -11,14 +13,11 @@ export default class CoinPrices extends Component {
 
     componentDidMount () {
         Coins.getCoins (15, (data) => {
-            console.log ("SUCCESS");
             this.setState (
                 {
-                    // coins : data[0]
                     coins : data
                 }
             );
-            // console.log (data[0]);
         }, () => {
             console.log ("failed to get data");
         });
@@ -26,7 +25,6 @@ export default class CoinPrices extends Component {
         /* Coins.getCoin ("bitcoin", (data) => {
             this.setState (
                 {
-                    // coins : data[0]
                     coins : data
                 }
             );
@@ -39,6 +37,12 @@ export default class CoinPrices extends Component {
     render () {
         return (
             <ScrollView style = { styles.container }>
+
+                <SearchBar
+                    onChangeText = { (text) => { console.log (text) } }
+                    onClearText =  { () => { console.log ('text cleared') } }
+                    placeholder='Type Here...' />
+
 
                 <StatusBar 
                     barStyle = 'light-content'
