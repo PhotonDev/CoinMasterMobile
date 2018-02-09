@@ -7,6 +7,11 @@ export default class Keys {
 
     static server = "http://kraken.com";
 
+    /*
+        FUTURE : Need to pass in name of server, i.e kraken, binance, etc so that we can support multiple 
+                 keys and services. Also need to add the api key to firebase server and store only secret.
+    */
+
     static async setAPICredentials (key, secret, successCallback, failureCallback) {
         await Expo.SecureStore.setItemAsync(key, secret, null)
         .then (successCallback)
