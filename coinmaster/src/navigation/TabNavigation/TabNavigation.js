@@ -7,7 +7,7 @@ import Register from '../../components/Register/Register';
 import Profile from '../../components/Profile/Profile';
 import CoinPrices from '../../components/CoinPrices/CoinPrices';
 import RecycleTestComponent from '../../components/CoinPrices/RecycleTestComponent';
-import Keys from '../../components/Keys/Keys';
+import APIKeys from '../../components/APIKeys/APIKeys';
 
 const TabNavigation = TabNavigator ({
   Profile : {
@@ -50,10 +50,10 @@ const TabNavigation = TabNavigator ({
       )
     }
   },
-  Keys : {
-    screen : Keys,
+  APIKeys : {
+    screen : APIKeys,
     navigationOptions : {
-      tabBarLabel : 'Keys',
+      tabBarLabel : 'APIKeys',
       tabBarIcon : ({
         tintColor
       }) => (

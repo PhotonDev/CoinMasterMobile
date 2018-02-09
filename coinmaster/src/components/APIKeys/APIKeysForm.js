@@ -3,11 +3,10 @@ import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleS
 
 import * as Keychain from 'react-native-keychain';
 
-import KeysAPI from '../../api/KeysAPI';
+import Keys from '../../api/Keys';
 
-const server = "http://kraken.com";
 
-export default class KeysForm extends Component {
+export default class APIKeysForm extends Component {
 
     constructor () {
         super();
@@ -36,9 +35,20 @@ export default class KeysForm extends Component {
         console.log (secret);
 
         // Expo.SecureStore.setItemAsync(key, value, options)
-        KeysAPI.setItem (key, secret);
+        Keys.setAPICredentials (key, secret, () => {
+            console.log ("success to set Item");
+        }, () => {
+            console.log ("failed to set api key");
+        });
         
-        KeysAPI.getItem (key);
+        Keys.getAPICredentials (key, (data) => {
+            this.setState ({
+                    secret : data
+                }
+            );
+        }, () => {
+            console.log ("failed to get api secret");
+        });
 
     }
 

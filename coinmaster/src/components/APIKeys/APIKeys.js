@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { AppRegistry, Text, View, Image, KeyboardAvoidingView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import DismissKeyboard from 'dismissKeyboard';
 
-import KeysForm from './KeysForm';
+import APIKeysForm from './APIKeysForm';
 
-export default class Keys extends Component {
+export default class APIKeys extends Component {
 
     render () {
         const { navigate } = this.props.navigation;
@@ -23,7 +23,7 @@ export default class Keys extends Component {
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress = { () => { DismissKeyboard() } }>
                     <View style = { styles.formContainer }>
-                        <KeysForm />
+                        <APIKeysForm />
                     </View>
                 </TouchableWithoutFeedback>
 
