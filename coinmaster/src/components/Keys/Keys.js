@@ -14,9 +14,10 @@ export default class Keys extends Component {
                 <TouchableWithoutFeedback onPress = { () => { DismissKeyboard() } }>
                     <View style = { styles.logoContainer }>
                         <Text style = { styles.title }>
-                            INSERT API KEY AND SECRET FOR KRAKEN WE DO NOT STORE THIS INFORMATION ON THE SERVER
+                            INSERT API KEY AND SECRET FOR KRAKEN WE DO NOT STORE THE SECRET ON THE SERVER
                             WE STORE IT LOCALLY ON YOUR DEVICE AND USE IT SIMPLY TO REQUEST DATA FROM THE SERVER
-                            USING HTTPS
+                            USING HTTPS, WE ONLY STORE THE API KEY WHICH IS USELESS WITHOUT THE SECRET, DO NOT SHARE
+                            YOUR API SECRET WITH ANYBODY!
                         </Text>
                     </View>
                 </TouchableWithoutFeedback>
