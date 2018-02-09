@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 
-import Database from '../../database/Database';
+import * as Keychain from 'react-native-keychain';
+
+import KeysAPI from '../../api/KeysAPI';
+
+const server = "http://kraken.com";
 
 export default class KeysForm extends Component {
 
@@ -12,11 +16,30 @@ export default class KeysForm extends Component {
             secret : ''
         };
     }
+
+    /*
+    componentWillMount () {
+        Keychain.getInternetCredentials (server)
+            .then(()  => {
+                if (credentials) {
+                    this.setState ({
+                        key : credentials.username,
+                        secret : credentials.password
+                    })
+                }
+            })
+    } */
    
     submitKey = () => {
         const { key, secret } = this.state;
         console.log (key);
         console.log (secret);
+
+        // Expo.SecureStore.setItemAsync(key, value, options)
+        KeysAPI.setItem (key, secret);
+        
+        KeysAPI.getItem (key);
+
     }
 
     render () {
@@ -53,6 +76,11 @@ export default class KeysForm extends Component {
                     <TouchableOpacity onPress = { this.submitKey } style = { styles.buttonContainer }>
                         <Text style = { styles.buttonText }>Use Key</Text>
                     </TouchableOpacity>
+
+                    <Text>
+                        { this.state.key }
+                        { this.state.secret }
+                    </Text>
 
             </View>
         );
