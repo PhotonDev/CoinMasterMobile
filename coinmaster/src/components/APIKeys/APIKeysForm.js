@@ -5,6 +5,8 @@ import * as Keychain from 'react-native-keychain';
 
 import Keys from '../../api/Keys';
 
+// For testing purposes, do not use in live build
+const API_PUBLIC_KEY = "key";
 
 export default class APIKeysForm extends Component {
 
@@ -34,14 +36,20 @@ export default class APIKeysForm extends Component {
         console.log (key);
         console.log (secret);
 
+        // Comment out before deploying
+
         // Expo.SecureStore.setItemAsync(key, value, options)
-        Keys.setAPICredentials (key, secret, () => {
+        // Comment out line below and replace with line below that line for live version
+        Keys.setAPICredentials (API_PUBLIC_KEY, secret, () => {
+        // Keys.setAPICredentials (key, secret, () => {
             console.log ("success to set Item");
         }, () => {
             console.log ("failed to set api key");
         });
         
-        Keys.getAPICredentials (key, (data) => {
+        // Comment out line below and replace with line below that line for live version
+        Keys.getAPICredentials (API_PUBLIC_KEY, (data) => {
+        // Keys.getAPICredentials (key, (data) => {
             this.setState ({
                     secret : data
                 }
@@ -50,6 +58,20 @@ export default class APIKeysForm extends Component {
             console.log ("failed to get api secret");
         });
 
+    }
+
+    /*
+        For testing purposes, remove function and related button for live version
+    */
+    getKey = () => {
+        Keys.getAPICredentials (API_PUBLIC_KEY, (data) => {
+            this.setState ({
+                    secret : data
+                }
+            );
+        }, () => {
+            console.log ("failed to get api secret");
+        });
     }
 
     render () {
@@ -85,6 +107,10 @@ export default class APIKeysForm extends Component {
 
                     <TouchableOpacity onPress = { this.submitKey } style = { styles.buttonContainer }>
                         <Text style = { styles.buttonText }>Use Key</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress = { this.getKey } style = { styles.buttonContainer }>
+                        <Text style = { styles.buttonText }>Get Key</Text>
                     </TouchableOpacity>
 
                     <Text>
