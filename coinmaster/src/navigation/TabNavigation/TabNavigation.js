@@ -9,6 +9,7 @@ import CoinPrices from '../../components/CoinPrices/CoinPrices';
 import RecycleTestComponent from '../../components/CoinPrices/RecycleTestComponent';
 import APIKeys from '../../components/APIKeys/APIKeys';
 import Card from '../../components/Card/Card';
+import CardExample from '../../components/Card/CardExample';
 
 const TabNavigation = TabNavigator ({
   Profile : {
@@ -66,7 +67,7 @@ const TabNavigation = TabNavigator ({
     }
   },
   Card : {
-    screen : Card,
+    screen : CardExample,
     navigationOptions : {
       tabBarLabel : 'Card',
       tabBarIcon : ({
