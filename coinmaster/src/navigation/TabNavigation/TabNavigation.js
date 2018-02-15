@@ -8,6 +8,7 @@ import Profile from '../../components/Profile/Profile';
 import CoinPrices from '../../components/CoinPrices/CoinPrices';
 import RecycleTestComponent from '../../components/CoinPrices/RecycleTestComponent';
 import APIKeys from '../../components/APIKeys/APIKeys';
+import Card from '../../components/Card/Card';
 
 const TabNavigation = TabNavigator ({
   Profile : {
@@ -54,6 +55,20 @@ const TabNavigation = TabNavigator ({
     screen : APIKeys,
     navigationOptions : {
       tabBarLabel : 'APIKeys',
+      tabBarIcon : ({
+        tintColor
+      }) => (
+        <Image 
+          source = { require ('../../../assets/profile.imageset/user_male.png') }
+          style  = { [styles.icon, { tintColor : tintColor }]}
+        />
+      )
+    }
+  },
+  Card : {
+    screen : Card,
+    navigationOptions : {
+      tabBarLabel : 'Card',
       tabBarIcon : ({
         tintColor
       }) => (
