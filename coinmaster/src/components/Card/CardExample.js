@@ -1,14 +1,72 @@
+import Expo from 'expo';
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, TextInput, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
-
-import Swiper from 'react-native-swiper';
-import CreditCard, { CardImages } from 'react-native-credit-card';
+import { 
+    AppRegistry, 
+    View, 
+    Text, 
+    TouchableOpacity, 
+    StyleSheet,
+    ScrollView,
+    Dimensions,
+    TextInput,
+    Image
+} from 'react-native';
 
 const SWIPER_HEIGHT = 180;
-const { height, width } = Dimensions.get('window');
+import CreditCard, {CardImages} from 'react-native-credit-card';
+import Swiper from 'react-native-swiper';
+const {height, width} = Dimensions.get('window');
 
-export default class CardForm extends Component {
-   
+const styles = StyleSheet.create({
+    background: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: width,
+        height: height
+    },
+    container: {
+        backgroundColor: '#f2f2f2',
+        flex: 1,
+        paddingTop: 30
+    },
+    wrapper: {
+        height: SWIPER_HEIGHT,
+    },
+    slide: {
+        height: SWIPER_HEIGHT,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text: {
+        
+    },
+    card: {
+        marginHorizontal: 10,
+        marginBottom: 30,
+        backgroundColor: '#fff',
+        borderRadius: 3,
+        elevation: 3,
+        borderBottomWidth: 1,
+        borderRightWidth: 1,
+        borderColor: '#ddd',
+        padding: 10,
+    },
+    button: {
+        height: 40,
+        backgroundColor: '#1ba549',
+        justifyContent: 'center',
+    },
+    textButton: {
+        textAlign: 'center',
+        color: '#fff'
+    }
+
+});
+
+export default class CardExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,30 +115,21 @@ export default class CardForm extends Component {
         });
     }
 
-    render () {
-
-        let cardTypes = []; 
-
-        for (let key in CardImages) {
+    render() {
+        var cardTypes = []; 
+        for (var key in CardImages) {
             cardTypes.push({type: key, image: CardImages[key]});
         }
-
         if (this.state.restoring) {
             return null;
         }
-
         return (
             <View style={styles.container}>
-                <StatusBar 
-                    barStyle = 'light-content'
-                />
-                
-                <Image style={styles.background} source={require('./images/background.png')} resizeMode={'cover'} />
-                
+                <Image style={styles.background} source={require('../../../assets/card.imageset/background.png')} resizeMode={'cover'} />
                 <CreditCard
                     style={{marginVertical: 10, marginHorizontal: 10, marginBottom: 0, elevation: 3, alignSelf: 'center'}}
-                    imageFront={require('./images/card-front.png')}
-                    imageBack={require('./images/card-back.png')}
+                    imageFront={require('../../../assets/card.imageset/card-front.png')}
+                    imageBack={require('../../../assets/card.imageset/card-back.png')}
                     shiny={false}
                     bar={false}
                     focused={this.state.focused}
@@ -137,13 +186,11 @@ export default class CardForm extends Component {
                         </View>
                     </View>
                 </Swiper>
-                
                 <TouchableOpacity onPress={this.onNext.bind(this)}>
                     <View style={styles.button}>
                         <Text style={styles.textButton}>NEXT</Text>
                     </View>
                 </TouchableOpacity>
-            
             </View>
         );
     }
@@ -153,53 +200,4 @@ function cacheImages(images) {
     return images.map(image => Exponent.Asset.fromModule(image).downloadAsync());
 }
 
-const styles = StyleSheet.create({
-    background: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: width,
-        height: height
-    },
-    container: {
-        backgroundColor: '#f2f2f2',
-        flex: 1,
-        paddingTop: 30
-    },
-    wrapper: {
-        height: SWIPER_HEIGHT,
-    },
-    slide: {
-        height: SWIPER_HEIGHT,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    text: {
-        
-    },
-    card: {
-        marginHorizontal: 10,
-        marginBottom: 30,
-        backgroundColor: '#fff',
-        borderRadius: 3,
-        elevation: 3,
-        borderBottomWidth: 1,
-        borderRightWidth: 1,
-        borderColor: '#ddd',
-        padding: 10,
-    },
-    button: {
-        height: 40,
-        backgroundColor: '#1ba549',
-        justifyContent: 'center',
-    },
-    textButton: {
-        textAlign: 'center',
-        color: '#fff'
-    }
-
-});
-
-AppRegistry.registerComponent ('CardForm', () => CardForm);
+AppRegistry.registerComponent ('CardExample', () => CardExample);
