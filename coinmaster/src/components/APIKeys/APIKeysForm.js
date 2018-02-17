@@ -145,4 +145,4 @@ const styles = StyleSheet.create ({
     },
 })
 
-AppRegistry.registerComponent ('KeysForm', () => KeysForm);
+AppRegistry.registerComponent ('APIKeysForm', () => APIKeysForm);

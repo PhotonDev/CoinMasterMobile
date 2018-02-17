@@ -59,4 +59,4 @@ const styles = StyleSheet.create ({
     }
 });
 
-AppRegistry.registerComponent ('Keys', () => Keys);
+AppRegistry.registerComponent ('APIKeys', () => APIKeys);
