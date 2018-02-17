@@ -1,6 +1,8 @@
 import React from 'react';
 import { AppRegistry, View, StyleSheet } from 'react-native';
 
+import 'expo';
+
 import * as firebase from "firebase";
 
 import TabNavigation from './src/navigation/TabNavigation/TabNavigation';
